@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Recipe Home</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="conteiner-fluid jusftiy-content-md-center" style="margin: 50px">
+    <div class="row jusftiy-content-md-center">
+        <div class="col-md-6 offset-md-3">
+            <form id="noteform" th:object="${note}" th:action="@{/note/}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title"> Add new note.</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" style="padding-top: 25px">
+                            <div class="col-md-5 offset-md-1">
+                                <label>Title: </label>
+                                <input class="form-control" type="text" th:field="*{title}">
+                            </div>
+                            <div class="col-md-5">
+                                <label>Category: </label>
+                                <select class="form-control" th:field="*{category}">
+                                    <option value="Event" th:selected="*{category == 'Event'}">Event</option>
+                                    <option value="Important" th:selected="*{category== 'Important'}">Important
+                                    </option>
+                                    <option value="Thought" th:selected="*{category == 'Thought'}">Thought</option>
+                                    <option value="Dummy" th:selected="*{category == 'Dummy'}">Dummy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-bottom: 25px">
+                            <div class="col-md-10 offset-md-1">
+                                <label>Text: </label><br/>
+                                <textarea role="textbox" class="form-control" rows="4" type="text" th:field="*{text}"></textarea>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+                        <div class="btn-group d-flex" role="group">
+                            <a th:href="@{/}" href="#" class="btn btn-outline-primary w-100" role="button">Home</a>
+                            <a type="submit" class="btn btn-outline-success w-100"
+                               onclick="document.getElementById('noteform').submit();" role="button">
+                                Submit
+                            </a>
+                            <a th:if="${note.id}" href="#" class="btn btn-outline-danger" role="button">Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

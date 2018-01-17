@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Recipe Home</title>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="conteiner-fluid" style="margin-top: 50px">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6">
+
+            <div class="card">
+
+                    <div class="card-header">
+                        <h2 class="card-title text-warning">My notes</h2>
+                    </div>
+                    <div class="card-body" style="padding: 25px">
+                        <div th:if="${not #lists.isEmpty(notes)}">
+                            <table class="table table-hover">
+                                <thead class="text-primary">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">TITLE</th>
+                                    <th scope="col">CATEGORY</th>
+                                    <th scope="col">SHOW</th>
+                                    <th scope="col">UPDATE</th>
+                                    <th scope="col">DELETE</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:remove="all">
+                                    <th scope="row">1</th>
+                                    <td>Note 1</td>
+                                    <td>Category 1</td>
+                                    <td>Show</td>
+                                    <td>Update</td>
+                                    <td>Delete</td>
+                                </tr>
+                                <tr th:remove="all">
+                                    <th scope="row">2</th>
+                                    <td>Note 2</td>
+                                    <td>Category 2</td>
+                                    <td>Show</td>
+                                    <td>Update</td>
+                                    <td>Delete</td>
+
+                                </tr>
+                                <tr th:each="note: ${notes}">
+                                    <th scope="row" th:text="${note.id}">3</th>
+                                    <td th:text="${note.title}">Title 3</td>
+                                    <td th:text="${note.category}">Category 3</td>
+                                    <td><a href="#" th:href="@{'/note/' + ${note.id}+'/show'}">Show</a></td>
+                                    <td><a href="#" th:href="@{'/note/'+${note.id}+'/update'}">Update</a></td>
+                                    <td><a href="#" th:href="@{'note/'+${note.id}+'/delete'}">Delete</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group d-flex" role="group">
+                            <a th:href="@{/}" href="#" class="btn btn-outline-primary w-100">Home</a>
+                            <a th:href="@{'note/new'}" href="#" class="btn btn-outline-success w-100">Add</a>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
