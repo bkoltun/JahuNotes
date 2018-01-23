@@ -1,17 +1,18 @@
 package pl.jahw.apps.jahwnotes.services;
 
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.jahw.apps.jahwnotes.command.NoteCommand;
 import pl.jahw.apps.jahwnotes.converters.NoteCommandToNote;
 import pl.jahw.apps.jahwnotes.converters.NoteToNoteCommand;
 import pl.jahw.apps.jahwnotes.domain.Note;
+import pl.jahw.apps.jahwnotes.exceptions.NotFoundException;
 import pl.jahw.apps.jahwnotes.repositories.NoteRepository;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
 
 @Slf4j
 @Service
@@ -30,7 +31,6 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Set<Note> getNotes() {
         log.debug("Getting all notes (NoteService)");
-
         Set<Note> notesSet = new HashSet<>();
         noteRepository.findAll().iterator().forEachRemaining(notesSet::add);
 
@@ -43,6 +43,10 @@ public class NoteServiceImpl implements NoteService {
         log.debug("Getting note by id: " + id);
 
         Optional<Note> optionalNote = noteRepository.findById(id);
+
+        if(!optionalNote.isPresent()){
+            throw new NotFoundException("Note Not Found for ID value: "+String.valueOf(id));
+        }
 
         return optionalNote.get();
     }

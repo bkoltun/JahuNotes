@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Recipe Home</title>
+    <title>400 error - Invalid Value</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,7 +19,7 @@
             integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css" th:href="@{/css/style.css}"/>
 </head>
 <body style="margin-top: 50px">
 <div class="conteiner-fluid flex-md-column">
@@ -28,33 +28,20 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h2 class="card-title" th:utext="${'Title:' + note.title}">Note
-                        title</h2>
+                    <h2 class="card-title text-warning">400 error - Invalid Value</h2>
                 </div>
                 <div class="card-body" style="padding: 25px;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 th:text="${'Category: '+note.category}">
-                                Category:
-                            </h4>
-                        </div>
+                    <div class="col-md-12">
+                        <p th:text="${exception.getMessage()}">400 error  - error message</p>
                     </div>
-                    <div class="row justify-content-md-right">
-                        <div class="col-md-12" style="min-height: 300px">
-                            <p th:text="${note.text}">
-                                Text here
-                            </p>
-                        </div>
-                    </div>
+
 
                 </div>
-
 
                 <div class="card-footer">
                     <div class="btn-group d-flex" role="group">
-                        <a th:href="@{/}" href="#" class="btn btn-info w-100">Home</a>
-                        <a th:href="@{'/note/new'}" href="#" class="btn btn-success w-100">Add</a>
-                        <a th:href="@{'/note/'+${note.id}+'/delete'}" href="#" class="btn btn-danger w-100">Delete</a>
+                        <a th:href="@{/}" href="#" class="btn btn-outline-primary w-100">Home</a>
+                        <a th:href="@{'/note/new'}" href="#" class="btn btn-outline-success w-100">Add</a>
                     </div>
                 </div>
             </div>
